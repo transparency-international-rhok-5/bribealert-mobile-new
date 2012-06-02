@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.rhok.bribealert.R;
 import org.rhok.bribealert.services.RecordingService;
-import org.rhok.bribealert.services.VideoRecorder;
 
 import android.app.Activity;
 import android.content.ComponentName;

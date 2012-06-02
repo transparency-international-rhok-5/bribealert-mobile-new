@@ -22,7 +22,7 @@ public class RestConnector {
 	private static final String HTTP_PREFIX = "http://";
 
 	//TODO: Set path to rest service
-	private static final String PATH_TO_REST_SERVICE = "/notification";
+	private static final String PATH_TO_REST_SERVICE = "/upload";
 
 	private URI serverURL;
 
