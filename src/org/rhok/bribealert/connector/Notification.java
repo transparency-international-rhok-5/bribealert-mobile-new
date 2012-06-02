@@ -42,17 +42,24 @@ public class Notification {
 			throws UnsupportedEncodingException {
 		Double longitude = location.getLongitude();
 		Double latitude = location.getLatitude();
+		
+		Log.d(TAG, "Got longitude: " + longitude + " and latitude: " + latitude);
+		
 		content.addPart(KEY_LONGITUDE, new StringBody(longitude.toString()));
 		content.addPart(KEY_LATITUDE, new StringBody(latitude.toString()));
 	}
 
 	private void addDate(Date date) throws UnsupportedEncodingException {
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
+		
+		Log.d(TAG, "Got date " + formatter.format(date));
+		
 		content.addPart(KEY_DATE, new StringBody(formatter.format(date)));
 	}
 
 	private void addRecord(File record) throws FileNotFoundException {
 		if (record.exists()) {
+			Log.d(TAG, "Got record " + record.getAbsolutePath());
 			content.addPart(KEY_RECORD, new FileBody(record));
 		}
 		throw new FileNotFoundException("Couldn't find record "

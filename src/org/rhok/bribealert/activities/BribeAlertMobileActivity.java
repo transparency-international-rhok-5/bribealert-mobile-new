@@ -1,8 +1,11 @@
 package org.rhok.bribealert.activities;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import org.rhok.bribealert.R;
+import org.rhok.bribealert.connector.Notification;
 import org.rhok.bribealert.services.RecordingService;
 
 import android.app.Activity;
@@ -10,6 +13,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.location.Location;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -97,10 +102,9 @@ public class BribeAlertMobileActivity extends Activity {
 		}
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// doUnbindService();
+
+    public void uploadTestData(View view) {
+    	Notification notification = new Notification(new Location(), new Date(System.currentTimeMillis()), new File("/sdcard/recordings/1338673035841"));
 	}
 
 	protected void onResume() {
