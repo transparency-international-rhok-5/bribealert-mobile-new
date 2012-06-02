@@ -13,16 +13,17 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
-public class RestConnector {
+public class RestConnector extends AsyncTask<Notification, Boolean, Boolean> {
 
 	private static final String TAG = "RestConnector";
 
 	private static final String HTTP_PREFIX = "http://";
 
-	//TODO: Set path to rest service
-	private static final String PATH_TO_REST_SERVICE = "/upload";
+	// TODO: Set path to rest service
+	private static final String PATH_TO_REST_SERVICE = "/upload/";
 
 	private URI serverURL;
 
@@ -31,50 +32,64 @@ public class RestConnector {
 	private HttpPost httpPost = null;
 
 	public RestConnector(String serverIP) {
-		try{
+		try {
 			serverURL = new URI(HTTP_PREFIX + serverIP + PATH_TO_REST_SERVICE);
 
-			if(httpClient == null){
+			if (httpClient == null) {
 
 				httpClient = new DefaultHttpClient();
 			}
 
-			Log.d(TAG,"Setting serverURL: " + serverURL);
+			Log.d(TAG, "Setting serverURL: " + serverURL);
 
 			httpPost = new HttpPost(serverURL);
 
-		}catch (URISyntaxException use) {
+		} catch (URISyntaxException use) {
 			Log.e(TAG, "Can't set URI", use);
 		}
 	}
 
-	public boolean connected(){
+	public boolean connected() {
 		return httpClient != null;
 	}
 
-	public boolean sendData(Notification notificationToSend) throws UnsupportedEncodingException, ClientProtocolException{
+	private boolean sendData(Notification notificationToSend)
+			throws UnsupportedEncodingException, ClientProtocolException {
 		httpPost.setEntity(notificationToSend.getContent());
 		return executePostRequest();
 	}
 
-	private boolean executePostRequest() throws ClientProtocolException{
-		try{
-		HttpResponse response = httpClient.execute(httpPost);
-		StatusLine statusLine = response.getStatusLine();
-		response.getEntity().consumeContent();
+	private boolean executePostRequest() throws ClientProtocolException {
+		try {
+			HttpResponse response = httpClient.execute(httpPost);
+			StatusLine statusLine = response.getStatusLine();
+			response.getEntity().consumeContent();
 
-		return parseStatusLine(statusLine);
-		}catch(IOException ioe){
+			return parseStatusLine(statusLine);
+		} catch (IOException ioe) {
 			Log.e(TAG, "IO error while sending data", ioe);
 		}
 		return false;
 	}
 
-
 	private boolean parseStatusLine(StatusLine statusLine) {
-		switch(statusLine.getStatusCode()){
-		case HttpStatus.SC_OK:		
+		switch (statusLine.getStatusCode()) {
+		case HttpStatus.SC_OK:
 			return true;
+		}
+		return false;
+	}
+
+	@Override
+	protected Boolean doInBackground(Notification... params) {
+		if(params.length == 1){
+			try {
+				return sendData(params[0]);
+			} catch (UnsupportedEncodingException e) {
+				Log.d(TAG,"Unsupported encoding: " + e.getMessage());
+			} catch (ClientProtocolException e) {
+				Log.d(TAG,"ClientProtocolException: " + e.getMessage());
+			}
 		}
 		return false;
 	}

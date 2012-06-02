@@ -20,7 +20,7 @@ public class Notification {
 	private static final String KEY_LATITUDE = "lat";
 	private static final String KEY_DATE = "date";
 	private static final String KEY_RECORD = "record";
-	private static final String DATE_PATTERN = "YYYY-MM-DD HH:MM:ss.uuuuuu";
+	private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	private static final String TAG = "Notification";
 
 	private MultipartEntity content;
@@ -61,9 +61,10 @@ public class Notification {
 		if (record.exists()) {
 			Log.d(TAG, "Got record " + record.getAbsolutePath());
 			content.addPart(KEY_RECORD, new FileBody(record));
+		}else{
+			throw new FileNotFoundException("Couldn't find record "
+					+ record.getAbsolutePath());
 		}
-		throw new FileNotFoundException("Couldn't find record "
-				+ record.getAbsolutePath());
 	}
 
 	public MultipartEntity getContent() {
