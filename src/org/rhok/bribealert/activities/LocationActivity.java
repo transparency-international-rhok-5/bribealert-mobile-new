@@ -12,6 +12,11 @@ public class LocationActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        getLocation();
+    }
+    
+    public void getLocation(){
+    	
     }
 	
 	
