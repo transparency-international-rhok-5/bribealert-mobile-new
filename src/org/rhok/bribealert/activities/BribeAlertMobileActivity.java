@@ -53,10 +53,10 @@ public class BribeAlertMobileActivity extends Activity {
         Button recBtn = (Button) findViewById(R.id.button1);
         recBtn.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				try {
 					mRecService.startRecording();
+					startActivity(new Intent(BribeAlertMobileActivity.this, CameraActivity.class));
 					Log.d(tag, "Started recording");
 					moveTaskToBack(true);
 				} catch (IOException e) {

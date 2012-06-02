@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <service android:name=".services.RecordingService"></service>
+        <activity android:name=".activities.CameraActivity"></activity>
     </application>
 
 </manifest>
