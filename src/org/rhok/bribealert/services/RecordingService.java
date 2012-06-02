@@ -13,7 +13,7 @@ public class RecordingService extends Service{
 	//private boolean running=false;
 	
     public class RecordingServiceBinder extends Binder {
-    	RecordingService getService() {
+    	public RecordingService getService() {
             return RecordingService.this;
         }
     }

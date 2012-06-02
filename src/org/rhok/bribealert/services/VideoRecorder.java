@@ -22,7 +22,7 @@ import android.view.WindowManager;
 
 public class VideoRecorder extends SurfaceView implements SurfaceHolder.Callback{
 
-  final MediaRecorder recorder = new MediaRecorder();
+  public final MediaRecorder recorder = new MediaRecorder();
   SurfaceHolder holder;
   String path;
   Context c;
