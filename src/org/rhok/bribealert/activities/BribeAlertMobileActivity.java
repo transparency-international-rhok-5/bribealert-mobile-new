@@ -21,8 +21,7 @@ public class BribeAlertMobileActivity extends Activity {
   
     private RecordingService mRecService;
 	private boolean mIsBound;
-	private VideoRecorder vr;
-    private RecorderActivity ra;
+
 	
 	private static String tag = "BribeAlert MainActivity";
     
@@ -45,9 +44,7 @@ public class BribeAlertMobileActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        vr = (VideoRecorder) findViewById(R.id.camcorder_preview);
-        
+          
         doBindService();
         
         Button recBtn = (Button) findViewById(R.id.button1);
@@ -56,13 +53,24 @@ public class BribeAlertMobileActivity extends Activity {
 			public void onClick(View v) {
 				try {
 					mRecService.startRecording();
-					startActivity(new Intent(BribeAlertMobileActivity.this, CameraActivity.class));
 					Log.d(tag, "Started recording");
 					moveTaskToBack(true);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		});
+        
+        Button vidRecBtn = (Button) findViewById(R.id.button2);
+        vidRecBtn.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+					
+					startActivity(new Intent(BribeAlertMobileActivity.this, CameraActivity.class));
+					Log.d(tag, "Started video activity");
+					//moveTaskToBack(true);
+
 			}
 		});
     }
@@ -93,6 +101,7 @@ public class BribeAlertMobileActivity extends Activity {
     
     protected void onResume() {
 		super.onResume();
+		
 		if (mRecService != null) {
 			
 			try {
