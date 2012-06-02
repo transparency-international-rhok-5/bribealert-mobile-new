@@ -1,5 +1,6 @@
 package org.rhok.bribealert.activities;
 
+import org.rhok.bribealert.R;
 import android.app.Activity;
 import android.os.Bundle;
 
