@@ -20,7 +20,7 @@ public class Notification {
 	private static final String KEY_LATITUDE = "lat";
 	private static final String KEY_DATE = "date";
 	private static final String KEY_RECORD = "record";
-	private static final String DATE_PATTERN = "YYYY-MM-DD HH:MM:ss.uuuuuu";
+	private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	private static final String TAG = "Notification";
 
 	private MultipartEntity content;
@@ -42,21 +42,29 @@ public class Notification {
 			throws UnsupportedEncodingException {
 		Double longitude = location.getLongitude();
 		Double latitude = location.getLatitude();
+		
+		Log.d(TAG, "Got longitude: " + longitude + " and latitude: " + latitude);
+		
 		content.addPart(KEY_LONGITUDE, new StringBody(longitude.toString()));
 		content.addPart(KEY_LATITUDE, new StringBody(latitude.toString()));
 	}
 
 	private void addDate(Date date) throws UnsupportedEncodingException {
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
+		
+		Log.d(TAG, "Got date " + formatter.format(date));
+		
 		content.addPart(KEY_DATE, new StringBody(formatter.format(date)));
 	}
 
 	private void addRecord(File record) throws FileNotFoundException {
 		if (record.exists()) {
+			Log.d(TAG, "Got record " + record.getAbsolutePath());
 			content.addPart(KEY_RECORD, new FileBody(record));
+		}else{
+			throw new FileNotFoundException("Couldn't find record "
+					+ record.getAbsolutePath());
 		}
-		throw new FileNotFoundException("Couldn't find record "
-				+ record.getAbsolutePath());
 	}
 
 	public MultipartEntity getContent() {

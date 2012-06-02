@@ -1,10 +1,15 @@
 package org.rhok.bribealert.activities;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 
 import org.rhok.bribealert.R;
+import org.rhok.bribealert.connector.Notification;
+import org.rhok.bribealert.connector.RestConnector;
+import org.rhok.bribealert.provider.LocationProvider;
 import org.rhok.bribealert.services.RecordingService;
-import org.rhok.bribealert.services.VideoRecorder;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -12,10 +17,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class BribeAlertMobileActivity extends Activity {
 
@@ -98,10 +105,14 @@ public class BribeAlertMobileActivity extends Activity {
 		}
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// doUnbindService();
+
+    public void uploadTestData(View view) {
+    	try {
+			Notification notification = new Notification(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()), new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "recordings/1338673035841.3gp"));
+			new RestConnector("10.1.38.214:8000").execute(notification);
+		} catch (FileNotFoundException e) {
+			Toast.makeText(this, "Could not send data to server: " + e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	protected void onResume() {
