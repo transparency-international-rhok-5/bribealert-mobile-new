@@ -15,5 +15,6 @@
     <string name="street_name_text">Street:</string>
     <string name="fax_number_text">Fax:</string>
     <string name="url_text">URL:</string>
+    <string name="email_text">E-Mail:</string>
 
 </resources>

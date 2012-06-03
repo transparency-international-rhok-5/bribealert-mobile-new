@@ -27,9 +27,24 @@ public class GetHelpActivity extends Activity {
 
 	private final static String TAG = "GetHelpActivity";
 
+	private static final String TELEPHONE_KEY = "telephone";
+	private static final String CITY_KEY = "city";
+	private static final String FAX_KEY = "fax";
+	private static final String URL_KEY = "url";
+	private static final String COUNTRY_KEY = "country";
+	private static final String ZIPCODE_KEY = "zipcode";
+	private static final String STREET_KEY = "street";
+	private static final String EMAIL_KEY = "email";
+	
 	String messageString;
 
-	TextView txtView = null;
+	private TextView telephoneNumberView = null;
+	private TextView tiChapterView = null;
+	private TextView faxNumberView = null;
+	private TextView zipcodeView = null;
+	private TextView urlView = null;
+	private TextView streetView = null;
+	private TextView emailView = null;
 
 	JSONObject valuesObject = null;
 
@@ -44,7 +59,17 @@ public class GetHelpActivity extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			
-			// call setText here
+			Bundle data = msg.getData();
+			
+			tiChapterView.setText("TIChapter: " + data.getString(COUNTRY_KEY) + " (" + data.getString(CITY_KEY) + ")");
+			telephoneNumberView.setText(data.getString(TELEPHONE_KEY));
+			faxNumberView.setText(data.getString(FAX_KEY));
+			zipcodeView.setText(data.getString(ZIPCODE_KEY));
+			urlView.setText(data.getString(URL_KEY));
+			streetView.setText(data.getString(STREET_KEY));
+			emailView.setText(data.getString(EMAIL_KEY));
+			
+			
 		}
 	};
 	
@@ -60,8 +85,14 @@ public class GetHelpActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 
-		txtView = (TextView) findViewById(R.id.telephoneNumber);
-
+		telephoneNumberView = (TextView) findViewById(R.id.telephoneNumber);
+		faxNumberView = (TextView)findViewById(R.id.faxNumber);
+		zipcodeView = (TextView)findViewById(R.id.zipCode);
+		urlView = (TextView)findViewById(R.id.url);
+		streetView = (TextView)findViewById(R.id.streetName);
+		emailView = (TextView)findViewById(R.id.email);
+		tiChapterView = (TextView)findViewById(R.id.tiChapterText);
+		
 		sendGetChapter();
 
 	}
