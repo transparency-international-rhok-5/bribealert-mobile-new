@@ -15,6 +15,7 @@
  
     <TextView 
         android:id="@+id/tiChapterText"
+        style="@style/TextViewStyle"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -22,26 +23,101 @@
     
     <GridLayout 
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-    
-    <TextView 
-        android:id="@+id/telephoneNumberText"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+       >
+    
+    <TextView
+        android:id="@+id/zipCodeText"
+        style="@style/TextViewStyleName"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_row="0"
         android:layout_column="0"
-        android:text="@string/telephone_number_text"/>
+        android:text="@string/zip_code_text" />
     
     <TextView 
-        android:id="@+id/telephoneNumber"
+        android:id="@+id/zipCode"
+        style="@style/TextViewStyleValues"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_row="0"
         android:layout_column="1"
         android:text="@string/blind_text"/>
-</GridLayout>
+
+    <TextView
+        android:id="@+id/streetNameText"
+        style="@style/TextViewStyleName"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="@string/street_name_text" />
+    
+    <TextView 
+        android:id="@+id/streetName"
+        style="@style/TextViewStyleValues"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:text="@string/blind_text" android:layout_width="fill_parent"/>
+    
+    <TextView
+        android:id="@+id/telephoneNumberText"
+        style="@style/TextViewStyleName"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:text="@string/telephone_number_text" />
+    
+    <TextView 
+        android:id="@+id/telephoneNumber"
+        style="@style/TextViewStyleName"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:text="@string/blind_text"/>
+    
+    <TextView
+        android:id="@+id/faxNumberText"
+        style="@style/TextViewStyleName"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:text="@string/fax_number_text" />
+    
+    <TextView 
+        android:id="@+id/faxNumber"
+        style="@style/TextViewStyleValues"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:text="@string/blind_text"/>
+    
+    <TextView
+        android:id="@+id/urlText"
+        style="@style/TextViewStyleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:text="@string/url_text" />
+    
+    <TextView 
+        android:id="@+id/url"
+        style="@style/TextViewStyleValues"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_row="4"
+        android:layout_column="1"
+        android:text="@string/blind_text"/>
+    
+	</GridLayout>
         
     <Button 
         android:id="@+id/iReportButton"

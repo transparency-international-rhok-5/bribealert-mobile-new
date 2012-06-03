@@ -11,5 +11,9 @@
     <string name="blind_text">Blind text</string>
     <string name="telephone_number_text">Phone:</string>
     <string name="serverIP">10.1.38.214:8000</string>
+    <string name="zip_code_text">ZipCode:</string>
+    <string name="street_name_text">Street:</string>
+    <string name="fax_number_text">Fax:</string>
+    <string name="url_text">URL:</string>
 
 </resources>
