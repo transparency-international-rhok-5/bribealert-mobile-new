@@ -11,7 +11,9 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 
+import android.content.SharedPreferences;
 import android.location.Location;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class UploadMessage implements MessageInterface {
@@ -29,18 +31,36 @@ public class UploadMessage implements MessageInterface {
 
 	private MultipartEntity content;
 
-	public UploadMessage(Location location, Date date, File record)
+	public UploadMessage(Location location, Date date)
 			throws FileNotFoundException {
 		content = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
 		try {
 			addLocationData(location);
 			addDate(date);
-			content.addPart(KEY_VIDEO_RECORD, new StringBody(""));
 		} catch (UnsupportedEncodingException usee) {
 			Log.d(TAG, "Unsorported encoding: " + usee.getMessage());
 		}
-		addRecord(record);
+	}
+	
+	public void addAudioRecord(File record) throws FileNotFoundException{
+		if (record.exists()) {
+			Log.d(TAG, "Got record " + record.getAbsolutePath());
+			content.addPart(KEY_AUDIO_RECORD, new FileBody(record));
+		}else{
+			throw new FileNotFoundException("Couldn't find record "
+					+ record.getAbsolutePath());
+		}
+	}
+	
+	public void addVideoRecord(File record) throws FileNotFoundException{
+		if (record.exists()) {
+			Log.d(TAG, "Got record " + record.getAbsolutePath());
+			content.addPart(KEY_VIDEO_RECORD, new FileBody(record));
+		}else{
+			throw new FileNotFoundException("Couldn't find record "
+					+ record.getAbsolutePath());
+		}
 	}
 	
 	private void addLocationData(Location location)
@@ -60,16 +80,6 @@ public class UploadMessage implements MessageInterface {
 		Log.d(TAG, "Got date " + formatter.format(date));
 		
 		content.addPart(KEY_DATE, new StringBody(formatter.format(date)));
-	}
-
-	private void addRecord(File record) throws FileNotFoundException {
-		if (record.exists()) {
-			Log.d(TAG, "Got record " + record.getAbsolutePath());
-			content.addPart(KEY_AUDIO_RECORD, new FileBody(record));
-		}else{
-			throw new FileNotFoundException("Couldn't find record "
-					+ record.getAbsolutePath());
-		}
 	}
 
 	public MultipartEntity getContent() {

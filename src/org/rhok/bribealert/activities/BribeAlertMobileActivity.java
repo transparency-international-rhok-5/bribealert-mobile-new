@@ -17,14 +17,18 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 public class BribeAlertMobileActivity extends Activity {
 
 	private RecordingService mRecService;
 	private boolean mIsBound;
-
+	private boolean video;
+	
 	private static String tag = "BribeAlert MainActivity";
 
 	private ServiceConnection mConnection = new ServiceConnection() {
@@ -51,11 +55,30 @@ public class BribeAlertMobileActivity extends Activity {
 		doBindService();
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, 0, 0, "Settings");
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		startActivity(new Intent(this, Settings.class));
+		return super.onOptionsItemSelected(item);
+	}
+	
 	public void startRecording(View v){
 		try {
-			mRecService.startRecording();
-			Log.d(tag, "Started recording");
-			moveTaskToBack(true);
+			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+			video = pref.getBoolean(getString(R.string.video_recording), false);
+			Log.d(tag, "Video recording: " + video);
+			if(video){
+				startActivity(new Intent(this,TIVideoCamera.class));
+			}else{
+				mRecService.startRecording();
+				Log.d(tag, "Started recording");
+				moveTaskToBack(true);
+			}
 		} catch (IOException e) {
 			Log.d(tag, "Problem starting the recorder " + e.getMessage());
 		}

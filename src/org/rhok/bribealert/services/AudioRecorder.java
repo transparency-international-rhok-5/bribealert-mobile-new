@@ -10,6 +10,7 @@ import android.os.Environment;
 
 public class AudioRecorder {
 
+	private static final String AUDIO_FILE = "-audio";
 	final MediaRecorder recorder = new MediaRecorder();
 	String path;
 	boolean startedRecording = false;
@@ -44,7 +45,7 @@ public class AudioRecorder {
 	public void start() throws IOException {
 
 		path = sanitizePath("/recordings/" + System.currentTimeMillis()
-				+ ".mp4");
+				+ AUDIO_FILE + ".mp4");
 
 		String state = android.os.Environment.getExternalStorageState();
 		if (!state.equals(android.os.Environment.MEDIA_MOUNTED)) {

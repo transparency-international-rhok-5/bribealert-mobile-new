@@ -9,7 +9,7 @@
     <string name="ti_logo_content_description">The Transparency International logo</string>
     <string name="blind_text">Blind text</string>
     <string name="telephone_number_text">Phone:</string>
-    <string name="serverIP">10.1.38.214:8000</string>
+    <string name="serverIP">88.198.15.206:8000</string>
     <string name="zip_code_text">ZipCode:</string>
     <string name="street_name_text">Street:</string>
     <string name="fax_number_text">Fax:</string>
@@ -44,5 +44,6 @@
 	<string name="bribe_warning">It is probably a bribe attempt, you should report it.</string>
 	<string name="no_bribe">It does not look like a bribe.</string>
 	<string name="ignore_no_bribe">You can report it anyways</string>
+	<string name="video_recording">video</string>
 </resources>
 

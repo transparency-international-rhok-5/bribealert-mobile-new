@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -55,6 +56,7 @@ public class ReportingActivity extends Activity{
 		uploadDataButton = (Button)findViewById(R.id.uploadButton);
 		fileSpinner = (Spinner)findViewById(R.id.filePicker);
 		description = (EditText)findViewById(R.id.descriptionInputField);
+		
 		loadDataIntoSpinner();
 	}
 	
@@ -96,8 +98,15 @@ public class ReportingActivity extends Activity{
 	public void uploadData(View view){
 		File file = (File) fileSpinner.getAdapter().getItem(fileSpinner.getFirstVisiblePosition());
 		try {
-			UploadMessage uploadMessage = new UploadMessage(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()), file);
+			UploadMessage uploadMessage = new UploadMessage(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()));
 			uploadMessage.addPublish(publish);
+			
+			if(file.getAbsolutePath().contains("-video")){
+				uploadMessage.addVideoRecord(file);
+			}else{
+				uploadMessage.addAudioRecord(file);
+			}
+			
 			addDescriptionIfAvaible(uploadMessage);
 			
 			PostRESTConnector postRestConnector = new PostRESTConnector(getString(R.string.serverIP));

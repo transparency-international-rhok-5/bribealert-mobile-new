@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Video/Audio Recording">
+		<CheckBoxPreference android:title="Audio or Video Recording"
+		    android:summaryOn="Video recording"
+		    android:summaryOff="Audio recording"
+		    android:key="@string/video_recording"
+		    android:defaultValue="false"/>    
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

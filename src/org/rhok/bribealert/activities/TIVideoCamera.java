@@ -19,6 +19,7 @@ public class TIVideoCamera extends Activity implements SurfaceHolder.Callback{
 
 	private static final String TAG = "TI CAMERA";
 
+	private static final String VIDEO_FILE = "-video";
 	private SurfaceView surfaceView;
 	private SurfaceHolder surfaceHolder;
 	private Camera camera;
@@ -99,7 +100,7 @@ public class TIVideoCamera extends Activity implements SurfaceHolder.Callback{
 			mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
 			path = Environment.getExternalStorageDirectory().getAbsolutePath()
-						+ "/recordings/" + System.currentTimeMillis() + ".mp4";
+						+ "/recordings/" + System.currentTimeMillis() + VIDEO_FILE + ".mp4";
 			
 			mediaRecorder.setOutputFile(path);
 
