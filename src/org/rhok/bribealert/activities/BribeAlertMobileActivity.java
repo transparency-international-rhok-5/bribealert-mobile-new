@@ -21,7 +21,6 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class BribeAlertMobileActivity extends Activity {
@@ -51,36 +50,28 @@ public class BribeAlertMobileActivity extends Activity {
 		setContentView(R.layout.main);
 
 		doBindService();
-
-		Button recBtn = (Button) findViewById(R.id.button1);
-		recBtn.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				try {
-					mRecService.startRecording();
-					Log.d(tag, "Started recording");
-					moveTaskToBack(true);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-
-		Button vidRecBtn = (Button) findViewById(R.id.button2);
-		vidRecBtn.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-
-				startActivity(new Intent(BribeAlertMobileActivity.this,
-						CameraActivity.class));
-				Log.d(tag, "Started video activity");
-				// moveTaskToBack(true);
-
-			}
-		});
 	}
 
+	public void testAudioRecording(View v) {
+		try {
+			mRecService.startRecording();
+			Log.d(tag, "Started recording");
+			moveTaskToBack(true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void testVideoRecording(View v) {
+
+		startActivity(new Intent(BribeAlertMobileActivity.this,
+				CameraActivity.class));
+		Log.d(tag, "Started video activity");
+		// moveTaskToBack(true);
+
+	}
+
+	
 	public void startGetHelpActivity(View v) {
 		startActivity(new Intent(BribeAlertMobileActivity.this,
 				GetHelpActivity.class));
