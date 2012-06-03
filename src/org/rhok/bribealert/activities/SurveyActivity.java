@@ -41,6 +41,7 @@ public class SurveyActivity extends Activity {
 
 	public void startReportingActivity(View view) {
 		startActivity(new Intent(SurveyActivity.this, ReportingActivity.class));
+		this.finish();
 		Log.d(tag, "Started gethelp activity");
 	}
 
