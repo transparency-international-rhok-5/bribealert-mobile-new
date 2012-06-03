@@ -70,7 +70,7 @@ public class BribeAlertMobileActivity extends Activity {
 
 	public void startReportingActivity(View view) {
 		startActivity(new Intent(BribeAlertMobileActivity.this,
-				TIVideoCamera.class));
+				ReportingActivity.class));
 		Log.d(tag, "Started gethelp activity");
 	}
 	void doBindService() {
