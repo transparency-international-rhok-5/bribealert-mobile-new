@@ -12,7 +12,9 @@
         android:layout_height="match_parent"
         android:keepScreenOn="true"
         android:orientation="vertical" >
-<!-- q1 -->
+
+        <!-- q1 -->
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -46,7 +48,8 @@
                 android:onClick="showNoBribe"
                 android:text="@string/no" />
         </LinearLayout>
-<!-- q2 -->
+        <!-- q2 -->
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -96,8 +99,8 @@
                 android:onClick="nextLayout"
                 android:text="@string/executivePower" />
         </LinearLayout>
-        
-<LinearLayout
+
+        <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -129,9 +132,10 @@
                 android:gravity="center"
                 android:onClick="showNoBribe"
                 android:text="@string/no" />
-        </LinearLayout>        
-        
-<!-- q4 -->
+        </LinearLayout>
+
+        <!-- q4 -->
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -181,7 +185,8 @@
                 android:onClick="showNoBribe"
                 android:text="@string/other" />
         </LinearLayout>
-<!-- q5 -->
+        <!-- q5 -->
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -215,7 +220,8 @@
                 android:onClick="showBribe"
                 android:text="@string/privateGain" />
         </LinearLayout>
-<!-- NO BRIBE -->
+        <!-- NO BRIBE -->
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/noBribe"
@@ -260,7 +266,8 @@
                 android:onClick="startReportingActivity"
                 android:text="@string/i_report_button_text" />
         </LinearLayout>
-<!-- BRIBE -->
+        <!-- BRIBE -->
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -278,7 +285,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/bribe_warning"
                 android:textSize="30dp" >
             </TextView>
@@ -287,6 +295,8 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:onClick="startReportingActivity"
                 android:text="@string/i_report_button_text" />
         </LinearLayout>
