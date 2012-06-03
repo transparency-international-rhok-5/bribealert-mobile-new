@@ -16,5 +16,10 @@
     <string name="fax_number_text">Fax:</string>
     <string name="url_text">URL:</string>
     <string name="email_text">E-Mail:</string>
+    <string name="description_hint">Please add a description</string>
+    <string name="description_header">Description:</string>
+    <string name="publish_text">If checked your evidence will be published public.</string>
+    <string name="upload_button_text">Upload data</string>
+    <string name="publish_button_text">Publish data</string>
 
 </resources>
