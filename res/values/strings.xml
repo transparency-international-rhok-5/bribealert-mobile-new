@@ -32,5 +32,11 @@
 	<string name="other">Other</string>
 	<string name="ideologicalAndpolitical">Ideological or Political</string>
 	<string name="privateGain">Private Gain</string> 
+    <string name="description_hint">Please add a description</string>
+    <string name="description_header">Description:</string>
+    <string name="publish_text">If checked your evidence will be published public.</string>
+    <string name="upload_button_text">Upload data</string>
+    <string name="publish_button_text">Publish data</string>
+
 </resources>
->>>>>>> Added survey activity
+>>>>>>> Added a logo and starting to implement logic behind reporting
