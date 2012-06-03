@@ -19,7 +19,8 @@ public class UploadMessage implements MessageInterface {
 	private static final String KEY_LONGITUDE = "lon";
 	private static final String KEY_LATITUDE = "lat";
 	private static final String KEY_DATE = "date";
-	private static final String KEY_RECORD = "record";
+	private static final String KEY_AUDIO_RECORD = "audio_record";
+	private static final String KEY_VIDEO_RECORD = "video_record";
 	private static final String KEY_PUBLISH = "published";
 	private static final String KEY_DESCRIPTION = "description";
 	
@@ -35,12 +36,13 @@ public class UploadMessage implements MessageInterface {
 		try {
 			addLocationData(location);
 			addDate(date);
+			content.addPart(KEY_VIDEO_RECORD, new StringBody(""));
 		} catch (UnsupportedEncodingException usee) {
 			Log.d(TAG, "Unsorported encoding: " + usee.getMessage());
 		}
 		addRecord(record);
 	}
-
+	
 	private void addLocationData(Location location)
 			throws UnsupportedEncodingException {
 		Double longitude = location.getLongitude();
@@ -63,7 +65,7 @@ public class UploadMessage implements MessageInterface {
 	private void addRecord(File record) throws FileNotFoundException {
 		if (record.exists()) {
 			Log.d(TAG, "Got record " + record.getAbsolutePath());
-			content.addPart(KEY_RECORD, new FileBody(record));
+			content.addPart(KEY_AUDIO_RECORD, new FileBody(record));
 		}else{
 			throw new FileNotFoundException("Couldn't find record "
 					+ record.getAbsolutePath());

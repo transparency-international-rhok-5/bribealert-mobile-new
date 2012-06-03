@@ -21,5 +21,8 @@
     <string name="publish_text">If checked your evidence will be published public.</string>
     <string name="upload_button_text">Upload data</string>
     <string name="publish_button_text">Publish data</string>
+    <string name="inbox_content_description">The inbox button</string>
+    <string name="token_prefs">tokens</string>
+    <string name="secret_token">secrettoken</string>
 
 </resources>

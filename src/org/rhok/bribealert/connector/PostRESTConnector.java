@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Set;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -30,6 +32,8 @@ public class PostRESTConnector extends AbstractRESTConnector {
 	private HttpClient httpClient = null;
 
 	private HttpPost httpPost = null;
+
+	private MessageDistributionInterface messageDistributor;
 
 	public PostRESTConnector(String serverIP) {
 		try {
@@ -59,8 +63,17 @@ public class PostRESTConnector extends AbstractRESTConnector {
 		try {
 			HttpResponse response = httpClient.execute(httpPost);
 			StatusLine statusLine = response.getStatusLine();
-			response.getEntity().consumeContent();
-
+			boolean validResponse = parseStatusLine(statusLine);
+			if (validResponse) {
+				HttpEntity entity = response.getEntity();
+				if (messageDistributor != null) {
+					messageDistributor.distributeMessage(entity);
+				} else {
+					Log.e(TAG, "No distribution interface set");
+				}
+				entity.consumeContent();
+				return validResponse;
+			}
 			return parseStatusLine(statusLine);
 		} catch (IOException ioe) {
 			Log.e(TAG, "IO error while sending data", ioe);
@@ -83,6 +96,8 @@ public class PostRESTConnector extends AbstractRESTConnector {
 		return executePostRequest();
 	}
 
-
+	public void setMessageDistribution(MessageDistributionInterface messageDistributor){
+		this.messageDistributor = messageDistributor;
+	}
 
 }

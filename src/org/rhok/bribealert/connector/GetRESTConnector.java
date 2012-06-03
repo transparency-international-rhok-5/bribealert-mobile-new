@@ -47,6 +47,21 @@ public class GetRESTConnector extends AbstractRESTConnector {
 		}
 	}
 
+	public GetRESTConnector(String serverIP, String pathToRestService) {
+		try {
+			serverURL = new URI(HTTP_PREFIX + serverIP + pathToRestService);
+
+			if (httpClient == null) {
+
+				httpClient = new DefaultHttpClient();
+			}
+
+
+		} catch (URISyntaxException use) {
+			Log.e(TAG, "Can't set URI", use);
+		}
+	}
+	
 	public boolean connected() {
 		return httpClient != null;
 	}

@@ -2,7 +2,11 @@ package org.rhok.bribealert.activities;
 
 import java.io.IOException;
 
+import org.apache.http.HttpEntity;
 import org.rhok.bribealert.R;
+import org.rhok.bribealert.connector.GetNotificationMessage;
+import org.rhok.bribealert.connector.GetRESTConnector;
+import org.rhok.bribealert.connector.MessageDistributionInterface;
 import org.rhok.bribealert.services.RecordingService;
 
 import android.app.Activity;
@@ -10,6 +14,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -40,7 +45,9 @@ public class BribeAlertMobileActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+//		checkForNotifications();
+		
 		doBindService();
 	}
 
@@ -95,6 +102,8 @@ public class BribeAlertMobileActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
+//		checkForNotifications();
+		
 		if (mRecService != null) {
 
 			try {
@@ -105,6 +114,25 @@ public class BribeAlertMobileActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+
+	private void checkForNotifications() {
+		SharedPreferences tokens = getSharedPreferences(getString(R.string.token_prefs), 0);
+		String secretToken = tokens.getString(getString(R.string.secret_token),"");
+		
+		GetNotificationMessage notifactionMessage = new GetNotificationMessage(secretToken);
+		GetRESTConnector getConnector = new GetRESTConnector(getString(R.string.serverIP), "messages");
+		getConnector.setMessageDistribution(new SecretTokenDistrubition());
+		
+		getConnector.execute(notifactionMessage);
+	}
+	
+	private class SecretTokenDistrubition implements MessageDistributionInterface{
+		@Override
+		public void distributeMessage(HttpEntity entity) {
+			
+			
 		}
 	}
 }
