@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="TextViewStyle" parent="@android:style/TextAppearance.Medium">
-    	<item name="android:textSize">8pt</item>
-    	<item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">8pt</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
-    
+
     <style name="TextViewStyleName" parent="@style/TextViewStyle">
-    	<item name="android:layout_width">wrap_content</item>
-    	<item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
     </style>
-    
+
     <style name="TextViewStyleValues" parent="@style/TextViewStyle">
-    	<item name="android:layout_width">225dp</item>
-    	<item name="android:gravity">center</item>
+        <item name="android:layout_width">225dp</item>
+        <item name="android:gravity">center</item>
     </style>
-    
+
 </resources>

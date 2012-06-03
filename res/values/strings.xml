@@ -37,6 +37,9 @@
     <string name="publish_text">If checked your evidence will be published public.</string>
     <string name="upload_button_text">Upload data</string>
     <string name="publish_button_text">Publish data</string>
-
+	<string name="warning_content_description">The bribe warning picture</string>
+	<string name="bribe_warning">It is probably a bribe attempt, you should report it.</string>
+	<string name="no_bribe">It does not look like a bribe.</string>
+	<string name="ignore_no_bribe">You can report it anyways</string>
 </resources>
 
