@@ -1,10 +1,10 @@
 package org.rhok.bribealert.connector;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -17,18 +17,20 @@ import android.util.Log;
 
 public class GetRESTConnector extends AbstractRESTConnector {
 
-	private static final String TAG = "RestConnector";
+	private static final String TAG = "GetRESTConnector";
 
 	private static final String HTTP_PREFIX = "http://";
 
 	// TODO: Set path to rest service
-	private static final String PATH_TO_REST_SERVICE = "/upload/";
+	private static final String PATH_TO_REST_SERVICE = "/national-chapter/";
 
 	private URI serverURL;
 
 	private HttpClient httpClient = null;
 
 	private HttpGet httpGet = null;
+
+	private MessageDistributionInterface messageDistributor = null;
 
 	public GetRESTConnector(String serverIP) {
 		try {
@@ -39,9 +41,6 @@ public class GetRESTConnector extends AbstractRESTConnector {
 				httpClient = new DefaultHttpClient();
 			}
 
-			Log.d(TAG, "Setting serverURL: " + serverURL);
-
-			httpGet = new HttpGet(serverURL);
 
 		} catch (URISyntaxException use) {
 			Log.e(TAG, "Can't set URI", use);
@@ -53,13 +52,13 @@ public class GetRESTConnector extends AbstractRESTConnector {
 	}
 
 	@Override
-	protected boolean sendData(MessageInterface messageToSend) throws ClientProtocolException
-			{
-		try {
-			httpGet.setURI(new URI(messageToSend.getURI()));
-		} catch (URISyntaxException e) {
-			Log.e(TAG, "URI is malformed", e);
-		}
+	protected boolean sendData(MessageInterface messageToSend)
+			throws ClientProtocolException {
+		String uri = serverURL+messageToSend.getURI();
+		
+		Log.d(TAG, "RequestString: " +  uri);
+		
+		httpGet = new HttpGet(uri);
 		return executeGetRequest();
 	}
 
@@ -67,9 +66,19 @@ public class GetRESTConnector extends AbstractRESTConnector {
 		try {
 			HttpResponse response = httpClient.execute(httpGet);
 			StatusLine statusLine = response.getStatusLine();
-			response.getEntity().consumeContent();
-
-			return parseStatusLine(statusLine);
+			
+			Log.d(TAG,"Status for get-request" + statusLine);
+			boolean validResponse = parseStatusLine(statusLine);
+			if (validResponse) {
+				HttpEntity entity = response.getEntity();
+				if (messageDistributor != null) {
+					messageDistributor.distributeMessage(entity);
+				} else {
+					Log.e(TAG, "No distribution interface set");
+				}
+				entity.consumeContent();
+				return validResponse;
+			}
 		} catch (IOException ioe) {
 			Log.e(TAG, "IO error while sending data", ioe);
 		}
@@ -83,8 +92,9 @@ public class GetRESTConnector extends AbstractRESTConnector {
 		}
 		return false;
 	}
-
-
-
+	
+	public void setMessageDistribution(MessageDistributionInterface messageDistributor){
+		this.messageDistributor = messageDistributor;
+	}
 
 }

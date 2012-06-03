@@ -10,5 +10,6 @@
     <string name="ti_logo_content_description">The Transparency International logo</string>
     <string name="blind_text">Blind text</string>
     <string name="telephone_number_text">Phone:</string>
+    <string name="serverIP">10.1.38.214:8000</string>
 
 </resources>
