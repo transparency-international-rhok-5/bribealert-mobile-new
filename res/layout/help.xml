@@ -27,23 +27,6 @@
         android:layout_margin="5dp"
        >
     
-    <TextView
-        android:id="@+id/zipCodeText"
-        style="@style/TextViewStyleName"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:text="@string/zip_code_text" />
-    
-    <TextView 
-        android:id="@+id/zipCode"
-        style="@style/TextViewStyleValues"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:text="@string/blind_text"/>
 
     <TextView
         android:id="@+id/streetNameText"
@@ -62,6 +45,24 @@
         android:layout_row="1"
         android:layout_column="1"
         android:text="@string/blind_text" android:layout_width="fill_parent"/>
+    
+    <TextView
+        android:id="@+id/zipCodeText"
+        style="@style/TextViewStyleName"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:text="@string/zip_code_text" />
+    
+    <TextView 
+        android:id="@+id/zipCode"
+        style="@style/TextViewStyleValues"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:text="@string/blind_text"/>
     
     <TextView
         android:id="@+id/telephoneNumberText"
@@ -114,6 +115,24 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:layout_row="4"
+        android:layout_column="1"
+        android:text="@string/blind_text"/>
+
+    <TextView
+        android:id="@+id/emailText"
+        style="@style/TextViewStyleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:text="@string/email_text" />
+    
+    <TextView 
+        android:id="@+id/email"
+        style="@style/TextViewStyleValues"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_row="5"
         android:layout_column="1"
         android:text="@string/blind_text"/>
     
