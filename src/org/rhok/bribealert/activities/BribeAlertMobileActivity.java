@@ -44,6 +44,16 @@ public class BribeAlertMobileActivity extends Activity {
 		doBindService();
 	}
 
+	public void startRecording(View v){
+		try {
+			mRecService.startRecording();
+			Log.d(tag, "Started recording");
+			moveTaskToBack(true);
+		} catch (IOException e) {
+			Log.d(tag, "Problem starting the recorder " + e.getMessage());
+		}
+	}
+	
 	public void startIsThisCorruptionActivity(View v) {
 
 		startActivity(new Intent(BribeAlertMobileActivity.this,
@@ -63,7 +73,6 @@ public class BribeAlertMobileActivity extends Activity {
 				ReportingActivity.class));
 		Log.d(tag, "Started gethelp activity");
 	}
-	
 	void doBindService() {
 		// Establish a connection with the service. We use an explicit
 		// class name because we want a specific service implementation that

@@ -20,6 +20,9 @@ public class UploadMessage implements MessageInterface {
 	private static final String KEY_LATITUDE = "lat";
 	private static final String KEY_DATE = "date";
 	private static final String KEY_RECORD = "record";
+	private static final String KEY_PUBLISH = "published";
+	private static final String KEY_DESCRIPTION = "description";
+	
 	private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	private static final String TAG = "Notification";
 
@@ -74,5 +77,14 @@ public class UploadMessage implements MessageInterface {
 	@Override
 	public String getURI() {
 		return content.toString();
+	}
+	
+	public void addPublish(boolean publish) throws UnsupportedEncodingException{
+		Log.d(TAG, "User want to publish his data: " + publish);
+		content.addPart(KEY_PUBLISH, new StringBody(""+publish));
+	}
+	
+	public void addDescription(String description) throws UnsupportedEncodingException{
+		content.addPart(KEY_DESCRIPTION, new StringBody(description));
 	}
 }

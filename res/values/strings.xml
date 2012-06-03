@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, BribeAlertMobileActivity!</string>
-    <string name="app_name">BribeAlertMobile</string>
+    <string name="app_name">Bribe Alert</string>
     <string name="logo_content_description">Bribe alert logo</string>
     <string name="need_help_button_text">I need help !</string>
     <string name="is_this_corruption_button_text">Is this corruption ?</string>
