@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 public class GetHelpActivity extends Activity {
 	
+	
+	
 	MessageDistributionInterface msg =  new MessageDistributionInterface() {
 		
 		@Override

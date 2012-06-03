@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.rhok.bribealert.R;
-import org.rhok.bribealert.connector.Notification;
-import org.rhok.bribealert.connector.RestConnector;
+import org.rhok.bribealert.connector.UploadMessage;
+import org.rhok.bribealert.connector.PostRESTConnector;
 import org.rhok.bribealert.provider.LocationProvider;
 import org.rhok.bribealert.services.RecordingService;
 
@@ -108,8 +108,8 @@ public class BribeAlertMobileActivity extends Activity {
 
     public void uploadTestData(View view) {
     	try {
-			Notification notification = new Notification(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()), new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "recordings/1338673035841.3gp"));
-			new RestConnector("10.1.38.214:8000").execute(notification);
+			UploadMessage notification = new UploadMessage(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()), new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "recordings/1338673035841.3gp"));
+			new PostRESTConnector("10.1.38.214:8000").execute(notification);
 		} catch (FileNotFoundException e) {
 			Toast.makeText(this, "Could not send data to server: " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
