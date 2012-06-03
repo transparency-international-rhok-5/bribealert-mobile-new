@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 
 import org.apache.http.HttpEntity;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.rhok.bribealert.R;
@@ -16,9 +15,13 @@ import org.rhok.bribealert.provider.LocationProvider;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 public class GetHelpActivity extends Activity {
 
