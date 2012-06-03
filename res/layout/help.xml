@@ -147,5 +147,6 @@
         android:onClick="startReportingActivity"
         android:layout_margin="5dp"
         />
+    
 
 </LinearLayout>

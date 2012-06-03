@@ -80,7 +80,6 @@ public class BribeAlertMobileActivity extends Activity {
 				ReportingActivity.class));
 		Log.d(tag, "Started gethelp activity");
 	}
-
 	void doBindService() {
 		// Establish a connection with the service. We use an explicit
 		// class name because we want a specific service implementation that

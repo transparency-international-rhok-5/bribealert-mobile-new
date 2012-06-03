@@ -60,6 +60,7 @@ public class ReportingActivity extends Activity{
 	
 	private void loadDataIntoSpinner() {
 		ArrayAdapter<File> adapter = new ArrayAdapter<File>(this, R.layout.file_item);
+		
 		checkDirectory(adapter);
 		
 		fileSpinner.setAdapter(adapter);
