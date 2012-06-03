@@ -4,5 +4,12 @@
     <string name="hello">Hello World, BribeAlertMobileActivity!</string>
     <string name="app_name">BribeAlertMobile</string>
     <string name="serverIP">10.1.38.214:8000</string>
+    <string name="logo_content_description">Bribe alert logo</string>
+    <string name="need_help_button_text">I need help !</string>
+    <string name="is_this_corruption_button_text">Is this corruption ?</string>
+    <string name="i_report_button_text">I report !</string>
+    <string name="ti_logo_content_description">The Transparency International logo</string>
+    <string name="blind_text">Blind text</string>
+    <string name="telephone_number_text">Phone:</string>
 
 </resources>

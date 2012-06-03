@@ -4,32 +4,34 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button1"
+    <ImageView android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Audio recording" 
-        android:onClick="testAudioRecording"/>
+        android:src="@drawable/bribe_alarm_logo"
+        android:contentDescription="@string/logo_content_description"/>
     
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/needHelpButton"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Test Video recording" 
-        android:onClick="testVideoRecording"/>
+        android:text="@string/need_help_button_text"
+        android:layout_gravity="center_horizontal" 
+        android:onClick="startGetHelpActivity"/>
+    
+    <Button
+        android:id="@+id/isThisCorruptionButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/is_this_corruption_button_text" 
+        android:onClick="startIsThisCorruptionActivity"/>
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:id="@+id/iReportButton"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Test upload"
-        android:onClick="uploadTestData" />
-    
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Help" 
-        android:onClick="startGetHelpActivity"/>
+        android:layout_gravity="center_horizontal"
+        android:text="@string/i_report_button_text"
+        android:onClick="startReportingActivity" />
     
 </LinearLayout>

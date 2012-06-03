@@ -1,14 +1,8 @@
 package org.rhok.bribealert.activities;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 
 import org.rhok.bribealert.R;
-import org.rhok.bribealert.connector.UploadMessage;
-import org.rhok.bribealert.connector.PostRESTConnector;
-import org.rhok.bribealert.provider.LocationProvider;
 import org.rhok.bribealert.services.RecordingService;
 
 import android.app.Activity;
@@ -17,11 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 public class BribeAlertMobileActivity extends Activity {
 
@@ -52,32 +44,26 @@ public class BribeAlertMobileActivity extends Activity {
 		doBindService();
 	}
 
-	public void testAudioRecording(View v) {
-		try {
-			mRecService.startRecording();
-			Log.d(tag, "Started recording");
-			moveTaskToBack(true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void testVideoRecording(View v) {
+	public void startIsThisCorruptionActivity(View v) {
 
 		startActivity(new Intent(BribeAlertMobileActivity.this,
-				CameraActivity.class));
-		Log.d(tag, "Started video activity");
+				SurveyActivity.class));
+		Log.d(tag, "Started corruption activity");
 		// moveTaskToBack(true);
-
 	}
 
-	
 	public void startGetHelpActivity(View v) {
 		startActivity(new Intent(BribeAlertMobileActivity.this,
 				GetHelpActivity.class));
 		Log.d(tag, "Started gethelp activity");
 	}
 
+	public void startReportingActivity(View view) {
+		startActivity(new Intent(BribeAlertMobileActivity.this,
+				ReportingActivity.class));
+		Log.d(tag, "Started gethelp activity");
+	}
+	
 	void doBindService() {
 		// Establish a connection with the service. We use an explicit
 		// class name because we want a specific service implementation that
@@ -96,17 +82,6 @@ public class BribeAlertMobileActivity extends Activity {
 		}
 	}
 
-
-    public void uploadTestData(View view) {
-    	try {
-    		String serverIp = getString(R.string.serverIP);
-			UploadMessage notification = new UploadMessage(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()), new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "recordings/1338673035841.3gp"));
-			new PostRESTConnector(serverIp).execute(notification);
-		} catch (FileNotFoundException e) {
-			Toast.makeText(this, "Could not send data to server: " + e.getMessage(), Toast.LENGTH_LONG).show();
-		}
-	}
-
 	protected void onResume() {
 		super.onResume();
 
@@ -122,5 +97,4 @@ public class BribeAlertMobileActivity extends Activity {
 			}
 		}
 	}
-
 }

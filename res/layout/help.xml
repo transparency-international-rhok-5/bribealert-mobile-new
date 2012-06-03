@@ -6,7 +6,51 @@
     android:keepScreenOn="true"
     >
     
-    <TextView  android:id="@+id/textView1"
+    <ImageView 
+        android:id="@+id/tiLogo"
+        android:contentDescription="@string/ti_logo_content_description"
+        android:src="@drawable/transparency_international"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"/>
+ 
+    <TextView 
+        android:id="@+id/tiChapterText"
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_gravity="center_horizontal"
+        android:text="@string/blind_text"/>
+    
+    <GridLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+    
+    <TextView 
+        android:id="@+id/telephoneNumberText"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:text="@string/telephone_number_text"/>
+    
+    <TextView 
+        android:id="@+id/telephoneNumber"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:text="@string/blind_text"/>
+</GridLayout>
+        
+    <Button 
+        android:id="@+id/iReportButton"
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/i_report_button_text"
+        android:onClick="startReportingActivity"
+        android:layout_margin="5dp"
+        />
+    
 </LinearLayout>
