@@ -13,6 +13,7 @@ public class AudioRecorder {
 
   final MediaRecorder recorder = new MediaRecorder();
   String path;
+  boolean startedRecording = false;
   RecordingService rs;
 
   /**
@@ -61,6 +62,7 @@ public class AudioRecorder {
     recorder.setOutputFile(path);
     recorder.prepare();
     recorder.start();
+    startedRecording = true;
   }
   
   public void setPath(String s) {
@@ -82,8 +84,9 @@ public class AudioRecorder {
    * Stops a recording that has been previously started.
    */
   public void stop() throws IOException {
-    recorder.stop();
-    recorder.release();
+	  if(startedRecording){
+		  recorder.stop();
+		  recorder.release();
+	  }
   }
-
 }
