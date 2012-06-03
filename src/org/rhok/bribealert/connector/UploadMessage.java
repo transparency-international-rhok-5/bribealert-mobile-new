@@ -76,7 +76,6 @@ public class UploadMessage implements MessageInterface {
 		return content;
 	}
 
-	@Override
 	public String getURI() {
 		return content.toString();
 	}

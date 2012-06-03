@@ -49,7 +49,6 @@ public class GetHelpActivity extends Activity {
 	JSONObject valuesObject = null;
 
 	MessageDistributionInterface msg = new MessageDistributionInterface() {
-		@Override
 		public void distributeMessage(HttpEntity entity) {
 			parseChapter(entity);
 		}

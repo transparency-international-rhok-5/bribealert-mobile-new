@@ -33,6 +33,7 @@
         <activity android:name=".activities.CameraActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.SurveyActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.ReportingActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.TIVideoCamera" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
