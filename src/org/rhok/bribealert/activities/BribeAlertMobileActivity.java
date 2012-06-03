@@ -99,8 +99,9 @@ public class BribeAlertMobileActivity extends Activity {
 
     public void uploadTestData(View view) {
     	try {
+    		String serverIp = getString(R.string.serverIP);
 			UploadMessage notification = new UploadMessage(LocationProvider.getLocation(this), new Date(System.currentTimeMillis()), new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "recordings/1338673035841.3gp"));
-			new PostRESTConnector("10.1.38.214:8000").execute(notification);
+			new PostRESTConnector(serverIp).execute(notification);
 		} catch (FileNotFoundException e) {
 			Toast.makeText(this, "Could not send data to server: " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}

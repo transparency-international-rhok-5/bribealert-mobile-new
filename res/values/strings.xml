@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, BribeAlertMobileActivity!</string>
     <string name="app_name">BribeAlertMobile</string>
+    <string name="serverIP">10.1.38.214:8000</string>
 
 </resources>

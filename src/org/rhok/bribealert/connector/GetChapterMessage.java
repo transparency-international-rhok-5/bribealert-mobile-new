@@ -6,23 +6,29 @@ import android.location.Location;
 
 public class GetChapterMessage implements MessageInterface{
 
-	Location location;
+	String TAG = "GetChapterMessage";
 	
+	HttpEntity content;
 	String uri;
 	
 	public GetChapterMessage(Location location){
-		this.location=location;
-
+		buildURI(location);
+		
+	 
+	}
+	
+	private void buildURI(Location location){
+		uri = "?lat="+location.getLatitude()+"&lon="+location.getLongitude();
 	}
 
+
 	public HttpEntity getContent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getURI() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return uri;
 	}
 	
 	
