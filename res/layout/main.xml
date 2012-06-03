@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/bribe_alarm_logo"
+        android:onClick="startRecording"
         android:contentDescription="@string/logo_content_description"/>
     
     <Button
