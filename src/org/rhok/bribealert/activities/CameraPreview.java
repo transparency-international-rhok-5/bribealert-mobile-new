@@ -13,138 +13,146 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.WindowManager;
 
 /** A basic Camera preview class */
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
-    private static final String TAG = "CameraPreview";
+public class CameraPreview extends SurfaceView implements
+		SurfaceHolder.Callback {
+	private static final String TAG = "CameraPreview";
 	private SurfaceHolder mHolder;
-    private Camera mCamera;
-    
-    public final MediaRecorder recorder = new MediaRecorder();
-    String path;
-    
-    
-    public CameraPreview(Context context, Camera camera) {
-        super(context);
-        mCamera = camera;
+	private Camera mCamera;
 
-        // Install a SurfaceHolder.Callback so we get notified when the
-        // underlying surface is created and destroyed.
-        mHolder = getHolder();
-        mHolder.addCallback(this);
-        // deprecated setting, but required on Android versions prior to 3.0
-        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings/" + System.currentTimeMillis() + ".mp4";
-    }
+	public final MediaRecorder recorder = new MediaRecorder();
+	String path;
 
-    public void surfaceCreated(SurfaceHolder holder) {
-        // The Surface has been created, now tell the camera where to draw the preview.
-        try {
-            mCamera.setPreviewDisplay(holder);
-            mCamera.startPreview();
-        } catch (IOException e) {
-            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
-        }
-    }
-    
-    /**
-     * Starts a new recording.
-     */
-    public void start(Context c) throws IOException {
-      String state = android.os.Environment.getExternalStorageState();
-      if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-          throw new IOException("SD Card is not mounted.  It is " + state + ".");
-      }
+	public CameraPreview(Context context, Camera camera) {
+		super(context);
 
-      // make sure the directory we plan to store the recording in exists
-      File directory = new File(path).getParentFile();
-      if (!directory.exists() && !directory.mkdirs()) {
-        throw new IOException("Path to file could not be created.");
-      }
+		if (camera == null) {
+			return;
+		}
+		mCamera = camera;
 
-      WindowManager mWinMgr = (WindowManager)c.getSystemService(Context.WINDOW_SERVICE);
-      int displayWidth = mWinMgr.getDefaultDisplay().getWidth();
+		camera.unlock();
+		recorder.setCamera(camera);
 
-      if( (Integer.parseInt(Build.VERSION.SDK) >= 8) && (displayWidth >= 480)) {
-          recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-          recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
-          recorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-      }
-      else{
-          recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-          recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
-          recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-          recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-          recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
-          recorder.setVideoFrameRate(30);
-          recorder.setVideoSize(320, 240);
-      }
-      recorder.setOutputFile(path);
-      Surface s = mHolder.getSurface();
-      recorder.setPreviewDisplay(s);
-      recorder.prepare();
-      recorder.start();
-        }
+		// Install a SurfaceHolder.Callback so we get notified when the
+		// underlying surface is created and destroyed.
+		mHolder = getHolder();
+		mHolder.addCallback(this);
+		// deprecated setting, but required on Android versions prior to 3.0
+		mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-    /**
-     * Stops a recording that has been previously started.
-     */
-    public void stop() throws IOException {
-      try {
-          recorder.stop();
-          recorder.release();
-      }
-      catch(Exception e) {
-      }
-    }
-    
-    public String getPath() {
-        return path;
-    }
-    
-    
+		path = Environment.getExternalStorageDirectory().getAbsolutePath()
+				+ "/recordings/" + System.currentTimeMillis() + ".mp4";
+		try {
+			start(getContext());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        // empty. Take care of releasing the Camera preview in your activity.
-    	try {
+	public void surfaceCreated(SurfaceHolder holder) {
+		// The Surface has been created, now tell the camera where to draw the
+		// preview.
+		try {
+			mCamera.setPreviewDisplay(holder);
+			mCamera.startPreview();
+		} catch (IOException e) {
+			Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Starts a new recording.
+	 */
+	public void start(Context c) throws IOException {
+		String state = android.os.Environment.getExternalStorageState();
+		if (!state.equals(android.os.Environment.MEDIA_MOUNTED)) {
+			throw new IOException("SD Card is not mounted.  It is " + state
+					+ ".");
+		}
+
+		// make sure the directory we plan to store the recording in exists
+		File directory = new File(path).getParentFile();
+		if (!directory.exists() && !directory.mkdirs()) {
+			throw new IOException("Path to file could not be created.");
+		}
+
+		if ((Integer.parseInt(Build.VERSION.SDK) >= 8)) {
+			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+			recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
+			recorder.setProfile(CamcorderProfile
+					.get(CamcorderProfile.QUALITY_HIGH));
+		} else {
+			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+			recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
+			recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+			recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+			recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
+			recorder.setVideoFrameRate(30);
+		}
+		recorder.setOutputFile(path);
+		Surface s = mHolder.getSurface();
+		recorder.setPreviewDisplay(s);
+		recorder.prepare();
+		recorder.start();
+	}
+
+	/**
+	 * Stops a recording that has been previously started.
+	 */
+	public void stop() throws IOException {
+		try {
+			recorder.stop();
+			recorder.release();
+			mCamera.release();
+		} catch (Exception e) {
+		}
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		// empty. Take care of releasing the Camera preview in your activity.
+		try {
 			CameraPreview.this.stop();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+	}
 
-    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        // If your preview can change or rotate, take care of those events here.
-        // Make sure to stop the preview before resizing or reformatting it.
+	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+		// If your preview can change or rotate, take care of those events here.
+		// Make sure to stop the preview before resizing or reformatting it.
 
-        if (mHolder.getSurface() == null){
-          // preview surface does not exist
-          return;
-        }
+		if (mHolder.getSurface() == null) {
+			// preview surface does not exist
+			return;
+		}
 
-        // stop preview before making changes
-        try {
-            mCamera.stopPreview();
-        } catch (Exception e){
-          // ignore: tried to stop a non-existent preview
-        }
+		// stop preview before making changes
+		try {
+			mCamera.stopPreview();
+		} catch (Exception e) {
+			// ignore: tried to stop a non-existent preview
+		}
 
-        // set preview size and make any resize, rotate or
-        // reformatting changes here
+		// set preview size and make any resize, rotate or
+		// reformatting changes here
 
-        // start preview with new settings
-        try {
-            mCamera.setPreviewDisplay(mHolder);
-            mCamera.startPreview();
-            CameraPreview.this.start(getContext());
+		// start preview with new settings
+		try {
+			mCamera.setPreviewDisplay(mHolder);
+			mCamera.startPreview();
+			CameraPreview.this.start(getContext());
 
-        } catch (Exception e){
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-        }
-    }
-    
-    
+		} catch (Exception e) {
+			Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+		}
+	}
+
 }
