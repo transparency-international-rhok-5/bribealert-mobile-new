@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="hello">Hello World, BribeAlertMobileActivity!</string>
     <string name="app_name">BribeAlertMobile</string>
     <string name="logo_content_description">Bribe alert logo</string>
@@ -16,5 +15,22 @@
     <string name="fax_number_text">Fax:</string>
     <string name="url_text">URL:</string>
     <string name="email_text">E-Mail:</string>
-
+    <string name="q_1">Someone misused his or her power?</string>
+	<string name="q_2">What kind of power did he or she misused?</string>
+	<string name="q_3">Did someone benefit from this action</string>
+	<string name="q_4">What was his or her interest?</string>
+	<string name="q_5">What was the reason behind the misuse of power?</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="violence">Physical power</string>
+	<string name="assignments">Assignments</string>
+	<string name="employment">Employment</string>
+	<string name="executivePower">Executive Power</string>
+	<string name="financialAdvantage">Financial Advantage</string>
+	<string name="favouratism">Favouratism</string>
+	<string name="information">Information</string>
+	<string name="other">Other</string>
+	<string name="ideologicalAndpolitical">Ideological or Political</string>
+	<string name="privateGain">Private Gain</string> 
 </resources>
+>>>>>>> Added survey activity
